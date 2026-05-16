@@ -1,0 +1,257 @@
+/* ==========================================
+   1. VARIABLES Y CONFIGURACIÓN GENERAL
+   ========================================== */
+:root {
+    --bg-color: #121214;
+    --card-bg: #202024;
+    --text-color: #e1e1e6;
+    --text-muted: #8d8d99;
+    --primary: #4ea8de;
+    --primary-dark: #5e60ce;
+    --danger: #f75a68;
+    --border-radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* ==========================================
+   2. LOGO Y ENCABEZADO
+   ========================================== */
+.logo {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ==========================================
+   3. CONTENEDOR PRINCIPAL (FORMULARIO)
+   ========================================== */
+#userInput {
+    background-color: var(--card-bg);
+    width: 100%;
+    max-width: 500px;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    
+    /* Agregamos flexbox aquí para forzar a que el input y el botón estén en la misma fila */
+    display: flex;
+    flex-wrap: wrap; /* Permite que las estadísticas de abajo bajen, pero mantiene la fila arriba */
+}
+
+/* Modificamos los inputs para que se acoplen perfectamente */
+#userInput > input[type="text"] {
+    flex: 1; /* Hace que el input ocupe todo el espacio disponible restante */
+    padding: 14px;
+    background-color: #121214;
+    border: 1px solid #323238;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#userInput > input[type="text"]:focus {
+    border-color: var(--primary);
+}
+
+#addBtn {
+    width: 50px; /* Un ancho fijo ideal para el botón "+" */
+    padding: 14px 0;
+    background-color: var(--primary-dark);
+    border: none;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    
+    /* Asegura que se alinee verticalmente de forma perfecta con el input */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#addBtn:hover {
+    background-color: #48479e;
+}
+
+/* ==========================================
+   MODIFICACIÓN EXTRA (Para las estadísticas y lista)
+   ========================================== */
+/* Como volvimos el formulario un contenedor Flex, necesitamos asegurar 
+    que la lista y las estadísticas ocupen el 100% del ancho del contenedor */
+#list-container, #stats {
+    width: 100%;
+}
+/* Entrada de texto y botón "+" */
+#userInput > input[type="text"] {
+    width: calc(100% - 60px);
+    padding: 14px;
+    background-color: #121214;
+    border: 1px solid #323238;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#userInput > input[type="text"]:focus {
+    border-color: var(--primary);
+}
+
+#addBtn {
+    width: 60px;
+    padding: 14px;
+    background-color: var(--primary-dark);
+    border: none;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    vertical-align: top;
+}
+
+#addBtn:hover {
+    background-color: #48479e;
+}
+
+/* ==========================================
+   4. LISTA DE TAREAS
+   ========================================== */
+#list-container {
+    margin-top: 25px;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+#list {
+    display: flex;
+    align-items: center;
+    background-color: #29292e;
+    padding: 14px;
+    border-radius: var(--border-radius);
+    margin-bottom: 12px;
+    border: 1px solid #323238;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#list:hover {
+    background-color: #323238;
+    transform: translateX(2px);
+}
+
+/* Checkbox personalizado */
+#list input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+#list input[type="checkbox"]:checked {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+#list input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Texto de la tarea */
+#list label {
+    flex-grow: 1;
+    font-size: 0.95rem;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s, text-decoration 0.2s;
+}
+
+/* Efecto visual cuando la tarea esté completada (para cuando uses JavaScript) */
+#list input[type="checkbox"]:checked + label {
+    color: var(--text-muted);
+    text-decoration: line-through;
+}
+
+/* Botón de eliminar (Basurero) */
+.delete-btn {
+    width: 18px;
+    height: auto;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: invert(44%) sepia(49%) saturate(3048%) hue-rotate(331deg) brightness(101%) contrast(94%); /* Vuelve la imagen roja al pasar el mouse */
+}
+
+/* ==========================================
+   5. SECCIÓN DE ESTADÍSTICAS
+   ========================================== */
+#stats {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #323238;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+#total {
+    color: var(--primary);
+}
+
+#completed {
+    color: var(--primary-dark);
+}
