@@ -1,257 +1,162 @@
-/* ==========================================
-   1. VARIABLES Y CONFIGURACIÓN GENERAL
-   ========================================== */
 :root {
-    --bg-color: #121214;
-    --card-bg: #202024;
-    --text-color: #e1e1e6;
-    --text-muted: #8d8d99;
-    --primary: #4ea8de;
-    --primary-dark: #5e60ce;
-    --danger: #f75a68;
-    --border-radius: 8px;
+    --bg-color: #0b0b0b;       
+    --surface-color: #161616;  
+    --text-color: #ffffff;     
+    --text-muted: #888888;    
+    --accent-color: #e50914;  
+    --border-color: #262626;  
+    --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
+    font-family: var(--font-stack);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 100vh;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
-/* ==========================================
-   2. LOGO Y ENCABEZADO
-   ========================================== */
 .logo {
     max-width: 120px;
     height: auto;
-    margin-bottom: 10px;
-    transition: transform 0.3s ease;
-}
-
-.logo:hover {
-    transform: scale(1.05);
+    margin-bottom: 15px;
+    display: block;
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 800;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     margin-bottom: 30px;
-    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 5px;
 }
 
-/* ==========================================
-   3. CONTENEDOR PRINCIPAL (FORMULARIO)
-   ========================================== */
 #userInput {
-    background-color: var(--card-bg);
     width: 100%;
-    max-width: 500px;
-    padding: 25px;
-    border-radius: var(--border-radius);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    
-    /* Agregamos flexbox aquí para forzar a que el input y el botón estén en la misma fila */
+    max-width: 450px;
     display: flex;
-    flex-wrap: wrap; /* Permite que las estadísticas de abajo bajen, pero mantiene la fila arriba */
+    flex-direction: row; 
+    gap: 10px;
+    margin-bottom: 25px;
 }
 
-/* Modificamos los inputs para que se acoplen perfectamente */
-#userInput > input[type="text"] {
-    flex: 1; /* Hace que el input ocupe todo el espacio disponible restante */
-    padding: 14px;
-    background-color: #121214;
-    border: 1px solid #323238;
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
+#task {
+    flex: 1; 
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
     color: var(--text-color);
+    padding: 14px 16px;
+    border-radius: 8px;
     font-size: 1rem;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s ease;
 }
 
-#userInput > input[type="text"]:focus {
-    border-color: var(--primary);
+#task:focus {
+    border-color: var(--accent-color); 
 }
 
 #addBtn {
-    width: 50px; /* Un ancho fijo ideal para el botón "+" */
-    padding: 14px 0;
-    background-color: var(--primary-dark);
-    border: none;
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    
-    /* Asegura que se alinee verticalmente de forma perfecta con el input */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#addBtn:hover {
-    background-color: #48479e;
-}
-
-/* ==========================================
-   MODIFICACIÓN EXTRA (Para las estadísticas y lista)
-   ========================================== */
-/* Como volvimos el formulario un contenedor Flex, necesitamos asegurar 
-    que la lista y las estadísticas ocupen el 100% del ancho del contenedor */
-#list-container, #stats {
-    width: 100%;
-}
-/* Entrada de texto y botón "+" */
-#userInput > input[type="text"] {
-    width: calc(100% - 60px);
-    padding: 14px;
-    background-color: #121214;
-    border: 1px solid #323238;
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    background-color: var(--accent-color);
     color: var(--text-color);
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-#userInput > input[type="text"]:focus {
-    border-color: var(--primary);
-}
-
-#addBtn {
-    width: 60px;
-    padding: 14px;
-    background-color: var(--primary-dark);
     border: none;
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-    color: white;
-    font-size: 1.2rem;
+    padding: 0 20px;
+    font-size: 1.5rem;
     font-weight: bold;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.2s;
-    vertical-align: top;
+    transition: transform 0.1s ease, filter 0.2s ease;
 }
 
 #addBtn:hover {
-    background-color: #48479e;
+    filter: brightness(1.2);
 }
 
-/* ==========================================
-   4. LISTA DE TAREAS
-   ========================================== */
+#addBtn:active {
+    transform: scale(0.95);
+}
+
 #list-container {
-    margin-top: 25px;
-    max-height: 350px;
-    overflow-y: auto;
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 25px;
 }
 
 #list {
     display: flex;
+    flex-direction: column;
+    gap: 12px; 
+    width: 100%;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    background-color: #29292e;
-    padding: 14px;
-    border-radius: var(--border-radius);
-    margin-bottom: 12px;
-    border: 1px solid #323238;
-    transition: transform 0.2s, background-color 0.2s;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    padding: 14px 16px;
+    border-radius: 8px;
+    width: 100%;
 }
 
-#list:hover {
-    background-color: #323238;
-    transform: translateX(2px);
-}
-
-/* Checkbox personalizado */
-#list input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    border: 2px solid var(--primary);
-    border-radius: 50%;
-    cursor: pointer;
+.task-content {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-    transition: background-color 0.2s, border-color 0.2s;
+    gap: 12px;
 }
 
-#list input[type="checkbox"]:checked {
-    background-color: var(--primary-dark);
-    border-color: var(--primary-dark);
+.task-content input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent-color); 
 }
 
-#list input[type="checkbox"]:checked::after {
-    content: "✓";
-    color: white;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-/* Texto de la tarea */
-#list label {
-    flex-grow: 1;
-    font-size: 0.95rem;
+.task-content label {
+    font-size: 1rem;
     cursor: pointer;
     user-select: none;
-    transition: color 0.2s, text-decoration 0.2s;
 }
 
-/* Efecto visual cuando la tarea esté completada (para cuando uses JavaScript) */
-#list input[type="checkbox"]:checked + label {
-    color: var(--text-muted);
-    text-decoration: line-through;
-}
-
-/* Botón de eliminar (Basurero) */
 .delete-btn {
-    width: 18px;
-    height: auto;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     opacity: 0.6;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .delete-btn:hover {
     opacity: 1;
     transform: scale(1.1);
-    filter: invert(44%) sepia(49%) saturate(3048%) hue-rotate(331deg) brightness(101%) contrast(94%); /* Vuelve la imagen roja al pasar el mouse */
 }
 
-/* ==========================================
-   5. SECCIÓN DE ESTADÍSTICAS
-   ========================================== */
 #stats {
-    margin-top: 25px;
+    width: 100%;
+    max-width: 450px;
     padding-top: 15px;
-    border-top: 1px solid #323238;
+    border-top: 1px dashed var(--border-color);
     display: flex;
     justify-content: space-between;
+}
+
+#stats p {
     font-size: 0.85rem;
-    font-weight: bold;
-}
-
-#total {
-    color: var(--primary);
-}
-
-#completed {
-    color: var(--primary-dark);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
